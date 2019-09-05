@@ -17,7 +17,7 @@ notify() {
 ## Pango encode string
 #
 pangoenc() {
-	sed 's/&/\&amp;/g; s/"/\&quot;/g;'
+  sed 's/&/\&amp;/g; s/"/\&quot;/g;'
 }
 
 ## Menu renderer
@@ -44,7 +44,7 @@ test -f ~/.config/rofi/jifi.sh && . ~/.config/rofi/jifi.sh
 # static elements but also specific project listings
 #
 main_menu() {
-	_menu=$(cat <<EOF
+  _menu=$(cat <<EOF
 My issues
 Watched issues
 Create issue
@@ -54,24 +54,24 @@ $(for p in "${PROJECTS[@]}"; do echo "Issues: ${p}"; done)
 Projects
 EOF
 )
-	choice=`echo "${_menu}" | menu`
-	case ${choice} in
-		"My issues")
-			jira mine --template rofi_issues | menu "My issues" | cut -d' ' -f1 | issue_menu
-			;;
-		"Watched issues")
-			jira watched --template rofi_issues | menu "Watched issues" | cut -d' ' -f1 | issue_menu
-			;;
-		"Create issue")
-			;;
-		"Issues: "*)
-			p=$(echo $choice | cut -d' ' -f2)
-			jira list --template rofi_issues --query "project = ${p} AND (status != Done OR resolved >= -7d) ORDER BY priority desc, updated" | menu "${p} issues" | cut -d' ' -f1 | issue_menu
-			;;
-		"Projects")
-			jira projects --template rofi_projects | menu "Projects" | cut -d' ' -f1 | project_menu
-			;;
-	esac
+  choice=`echo "${_menu}" | menu`
+  case ${choice} in
+    "My issues")
+      jira mine --template rofi_issues | menu "My issues" | cut -d' ' -f1 | issue_menu
+      ;;
+    "Watched issues")
+      jira watched --template rofi_issues | menu "Watched issues" | cut -d' ' -f1 | issue_menu
+      ;;
+    "Create issue")
+      ;;
+    "Issues: "*)
+      p=$(echo $choice | cut -d' ' -f2)
+      jira list --template rofi_issues --query "project = ${p} AND (status != Done OR resolved >= -7d) ORDER BY priority desc, updated" | menu "${p} issues" | cut -d' ' -f1 | issue_menu
+      ;;
+    "Projects")
+      jira projects --template rofi_projects | menu "Projects" | cut -d' ' -f1 | project_menu
+      ;;
+  esac
 }
 
 ## Menu: Issue
@@ -102,18 +102,18 @@ EOF
       ;;
     "Transition")
       to=$(jira transitions ${issue} | cut -d' ' -f2- | menu "Transitions")
-			( jira transition ${to} ${issue} && notify "Task ${issue} state changed to ${to}" ) || notify "Task transition failed"
+      ( jira transition ${to} ${issue} && notify "Task ${issue} state changed to ${to}" ) || notify "Task transition failed"
       ;;
     "Assign")
-			to=$(jira assignable ${issue} | menu "Users")
+      to=$(jira assignable ${issue} | menu "Users")
       ( jira assign ${issue} ${to} && notify "Task ${issue} assigned to ${to}" ) || notify "Task assign failed"
       ;;
     "Unassign")
       ( jira unassign ${issue} && notify "Task ${issue} unassigned" ) || notify "Task unassign failed"
       ;;
-		"")
-			main_menu && return
-			;;
+    "")
+      main_menu && return
+      ;;
   esac
 }
 
@@ -122,24 +122,24 @@ EOF
 # Provides operations on a project
 #
 project_menu() {
-	_menu=$(cat <<EOF
+  _menu=$(cat <<EOF
 Tasks
 Members
 EOF
 )
-	project=$(cat -)
-	[[ "${project}" = "" ]] && main_menu && return
-	case `echo "${_menu}" | menu ${project}` in
-		"Tasks")
-			jira list --template rofi_issues --query "project = ${project} ORDER BY priority desc, updated" | menu ${project} issues | cut -d' ' -f1 | issue_menu
-			;;
-		"Members")
-			jira members ${project} | menu "${project} members" >/dev/null
-			;;
-		"")
-			main_menu && return
-			;;
-	esac
+  project=$(cat -)
+  [[ "${project}" = "" ]] && main_menu && return
+  case `echo "${_menu}" | menu ${project}` in
+    "Tasks")
+      jira list --template rofi_issues --query "project = ${project} ORDER BY priority desc, updated" | menu ${project} issues | cut -d' ' -f1 | issue_menu
+      ;;
+    "Members")
+      jira members ${project} | menu "${project} members" >/dev/null
+      ;;
+    "")
+      main_menu && return
+      ;;
+  esac
 }
 
 ## Workflow: Create issue
