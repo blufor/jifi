@@ -4,9 +4,9 @@
 
 ## Screenshots
 
-![Main menu](https://raw.githubusercontent.com/blufor/jifi/master/screenshots/rofi1.png)
-![Issues list](https://raw.githubusercontent.com/blufor/jifi/master/screenshots/rofi2.png)
-![Issue actions](https://raw.githubusercontent.com/blufor/jifi/master/screenshots/rofi3.png)
+![Main menu](https://raw.githubusercontent.com/blufor/jifi/master/screenshots/jifi1.png)
+![Issues list](https://raw.githubusercontent.com/blufor/jifi/master/screenshots/jifi2.png)
+![Issue actions](https://raw.githubusercontent.com/blufor/jifi/master/screenshots/jifi3.png)
 
 ## Features
 
