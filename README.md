@@ -40,7 +40,7 @@ There's a few steps you need to do before you use it. So here we go
 
 ### `jira` config
 
-It's located in `~/.jira.config.head` and should contain the following minimal config
+It's located in `~/.jira.d/config.yml.head` and should contain the following minimal config
 
 ```
 endpoint: https://jira.domain.com
@@ -48,8 +48,7 @@ user: <username in JIRA>
 login: <loginname in JIRA>
 
 ```
-
-NOTE: User and login are not the same thing
+**NOTE:** User and login [are not the same thing](https://github.com/go-jira/jira#user-vs-login).
 
 ### `jifi` config
 
@@ -58,6 +57,12 @@ It's located in `~/.config/rofi/jifi.sh` and should contain this minimal config
 ```
 PROJECTS=(CS CSI IT ITP) # Your favorite projects (it's a Bash array)
 TERMAPP=st               # Your X terminal app
+```
+
+You can also supply additional arguments to ROFI in the same file:
+
+```
+ROFI_ARGS="-width 1600"  # Rofi width in pixels. For more see: man rofi
 ```
 
 ### `jira` login

@@ -8,17 +8,17 @@ printvar() {
 
 CONF_DIR=~/.jira.d
 CONF_BASH=config.sh
-CONF_YAML=config.yaml.head
+CONF_YAML=config.yml.head
 
 cd ${CONF_DIR}
-if test -e config.sh
+if test -e ${CONF_DIR}/${CONF_BASH}
 then
-  source CONF_BASH
+  source ${CONF_DIR}/${CONF_BASH}
   printvar "${JIRA_ENDPOINT}" 'endpoint'
   printvar "${JIRA_USER}" 'user'
   printvar "${JIRA_LOGIN}" 'login'
 else
-  test -e ${CONF_DIR} && cat ./config.yml.head
+  test -e ${CONF_DIR}/${CONF_YAML} && cat ${CONF_DIR}/${CONF_YAML}
 fi
 
 echo 'custom-commands:'
