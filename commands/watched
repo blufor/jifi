@@ -1,0 +1,8 @@
+  - name: watched
+    help: Display issues watched by me
+    options:
+      - name: template
+        short: t
+        default: list
+    script: |-
+      {{jira}} list --template {{options.template}} --query "watcher = currentuser() AND (status != Done OR resolved >= -7d) ORDER BY priority desc, updated"

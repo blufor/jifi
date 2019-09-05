@@ -1,0 +1,25 @@
+#!/bin/bash -e
+
+printvar() {
+  local value="$1"
+  local key="$2"
+  test -z "${value}" && echo "${key}: ${value}"
+}
+
+CONF_DIR=~/.jira.d
+CONF_BASH=config.sh
+CONF_YAML=config.yaml.head
+
+cd ${CONF_DIR}
+if test -e config.sh
+then
+  source CONF_BASH
+  printvar "${JIRA_ENDPOINT}" 'endpoint'
+  printvar "${JIRA_USER}" 'user'
+  printvar "${JIRA_LOGIN}" 'login'
+else
+  test -e ${CONF_DIR} && cat ./config.yml.head
+fi
+
+echo 'custom-commands:'
+cat ${CONF_DIR}/commands/*

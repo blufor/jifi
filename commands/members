@@ -1,0 +1,6 @@
+  - name: members
+    help: Lists members of a project
+    args:
+      - name: project
+    script: |-
+      {{jira}} request --template members "/rest/api/2/user/permission/search?projectKey={{args.project}}&permissions=ASSIGNABLE_USER&maxResults=1000"

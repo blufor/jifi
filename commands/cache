@@ -1,0 +1,5 @@
+  - name: cache
+    help: Create cache of common and costful API calls locally (priorities, project priority schemes)
+    script: |-
+      {{jira}} request --template cache_prios "/rest/api/2/priority" | sort > ~/.jira.d/cache/prios
+      {{jira}} request --template cache_projectprios "/rest/api/2/priorityschemes/?expand=schemes.projectKeys" | sort > ~/.jira.d/cache/projectprios

@@ -1,0 +1,14 @@
+  - name: mine
+    help: Display issues assigned to me
+    options:
+      - name: template
+        short: t
+        default: list
+    args:
+      - name: project
+    script: |-
+      if [ x"{{args.project}}" = x"<no value>" ]; then
+        {{jira}} list --template {{options.template}} --query "assignee = currentuser() AND (status != Done OR resolved >= -7d) ORDER BY priority desc, updated"
+      else
+        {{jira}} list --template {{options.template}} --query "assignee = currentuser() AND project = {{args.project}} AND (status != Done OR resolved >= -7d) ORDER BY priority desc, updated"
+      fi

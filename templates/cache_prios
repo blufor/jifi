@@ -1,0 +1,3 @@
+{{ range . -}}
+{{ .id }}:{{ .name }}:{{ .statusColor }}
+{{ end -}}

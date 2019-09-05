@@ -1,0 +1,3 @@
+{{ range . -}}
+{{ .key | append ":" | printf "%-10s" }}{{ .name | printf "%-50s" }}{{ if .projectCategory }}({{ .projectCategory.name }}){{ end }}
+{{ end -}}

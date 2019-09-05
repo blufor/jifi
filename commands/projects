@@ -1,0 +1,7 @@
+  - name: projects
+    help: Lists projects
+    options:
+      - name: template
+        default: "projects"
+    script: |-
+      {{jira}} request --template={{options.template}} "/rest/api/2/project?maxResults=1000"

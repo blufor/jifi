@@ -1,0 +1,6 @@
+  - name: assignable
+    help: Lists users assignable to a given issue
+    args:
+      - name: issue
+    script: |-
+      {{jira}} request --template members "/rest/api/2/user/assignable/search?issueKey={{args.issue}}&maxResults=1000" 

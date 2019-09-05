@@ -1,0 +1,6 @@
+{{ range .schemes -}}
+{{ $prios := .optionIds -}}
+{{ range .projectKeys -}}
+{{ . }}:{{ $prios | join "," }}
+{{ end -}}
+{{ end -}}

@@ -1,0 +1,16 @@
+{{ range .issues -}}
+{{ .key | printf "%-10s " -}}
+{{ if .fields.priority -}}
+{{   if or (eq .fields.priority.name "Low") (eq .fields.priority.name "Trivial") -}}
+<span color='#6699CC'>{{ else if or (eq .fields.priority.name "Normal") (eq .fields.priority.name "Minor") -}}
+<span color='#CCCC99'>{{ else if or (eq .fields.priority.name "High") (eq .fields.priority.name "Major") (eq .fields.priority.name "Critical") -}}
+<span color='#CC6666'>{{ else if (eq .fields.priority.name "Blocker") -}}
+<span color='#FF99CC'>{{ else -}}
+<span color='#000000'>{{ end -}}
+{{ else }}<span color='#AAAAAA'>{{ end -}}
+▮</span> {{ .fields.summary | printf "%-75.75s " -}}
+{{ printf "%20.20s ┊ %-20.20s ┋ " .fields.issuetype.name .fields.status.name -}}
+{{ if .fields.assignee -}}
+{{ .fields.assignee.name -}}
+{{ end }}
+{{ end -}}
